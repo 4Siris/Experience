@@ -81,6 +81,6 @@ public class Service {
                 ", amountOfWorkers=" + amountOfWorkers +
                 ", customerName='" + customerName + '\'' +
                 ", amountOfMemory=" + amountOfMemory +
-                '}';
+                '}'+'\n';
     }
 }
