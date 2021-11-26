@@ -62,5 +62,6 @@ public class Processing {
             sum-=salary;
         }
         ans+=sum;
+        System.out.println(ans);
     }
 }
