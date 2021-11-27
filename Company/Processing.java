@@ -94,8 +94,8 @@ public class Processing {
         String topCustomer="";
         double topIncome=0;
         int frst=1;
-        int count=5;
-        for(int i=0;i<customersIncome.size();i++){
+        int count=tempCustomersIncome.size();
+        for(int i=0;i<((tempCustomersIncome.size()>5)?(5):(5-(5-count)));i++){
             for (Map.Entry<String, Double> customer: tempCustomersIncome.entrySet()){
                 if(frst==1){
                     topCustomer=customer.getKey();
@@ -110,8 +110,6 @@ public class Processing {
             tempCustomersIncome.remove(topCustomer);
             System.out.println(topCustomer+": "+topIncome);
             frst=1;
-            if (count==1)break;
-            else count--;
         }
     }
 
@@ -120,7 +118,8 @@ public class Processing {
         int frst=1;
         String topService="";
         double topIncome=0;
-        for(int i=0;i<servicesIncome.size();i++){
+        int count=tempServiceIncome.size();
+        for(int i=0;i<count;i++){
             for(Map.Entry<String,Double> service:tempServiceIncome.entrySet()) {
                 if (frst == 1) {
                     topService = service.getKey();
