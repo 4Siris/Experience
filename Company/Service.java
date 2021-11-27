@@ -12,6 +12,7 @@ public class Service {
     private String customerName;
     private int amountOfMemory;
 
+
     public Service(){
         costDollars=0;
         costCents=0;

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NeuralNetwork extends Service{
-    public NeuralNetwork(int accomplishedTime,int amountOfMemory,int choice){
-        super(0,0,accomplishedTime,new ArrayList<>(),"",amountOfMemory);
+    public NeuralNetwork(int accomplishedTime,int amountOfMemory,int choice, String customer){
+        super(0,0,accomplishedTime,new ArrayList<>(),customer,amountOfMemory);
         if(choice==1)setCostDollars(500*accomplishedTime);
         else setCostDollars(200*amountOfMemory);
         Worker newWorker=new Worker(1,33);

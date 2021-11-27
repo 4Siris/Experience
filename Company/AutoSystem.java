@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutoSystem extends Service{
-    public AutoSystem(int accomplishedTime,int amountOfMemory, int choice){
-        super(0,0,accomplishedTime,new ArrayList<>(),"",amountOfMemory);
-        ShowData showData=new ShowData(accomplishedTime,amountOfMemory);
-        Regression regression=new Regression(accomplishedTime,amountOfMemory);
-        NeuralNetwork neuralNetwork=new NeuralNetwork(accomplishedTime,amountOfMemory,choice);
+    public AutoSystem(int accomplishedTime,int amountOfMemory, int choice, String customer){
+        super(0,0,accomplishedTime,new ArrayList<>(),customer,amountOfMemory);
+        ShowData showData=new ShowData(accomplishedTime,amountOfMemory,customer);
+        Regression regression=new Regression(accomplishedTime,amountOfMemory,customer);
+        NeuralNetwork neuralNetwork=new NeuralNetwork(accomplishedTime,amountOfMemory,choice,customer);
         List<Worker> workers=new ArrayList<>();
         Worker newWorker=new Worker(3,120);
         workers.add(newWorker);
