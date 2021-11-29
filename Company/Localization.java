@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,34 +12,23 @@ public final class Localization {
         return languages;
     }
 
-    private Localization(){
+    private Localization(String fileName) throws FileNotFoundException {
         languages=new HashMap<>();
-        Map<String, String>language=new HashMap<>();
-        language.put("Доход компании", "Доход компании");
-        language.put("ShowData", "Показать данные");
-        language.put("Regression", "Регрессия");
-        language.put("NeuralNetwork", "Нейронная сеть");
-        language.put("AutoSystem", "Автоматизированная система");
-        languages.put("RU",language);
-        language=new HashMap<>();
-        language.put("Доход компании", "Company income");
-        language.put("ShowData", "Show data");
-        language.put("Regression", "Regression");
-        language.put("NeuralNetwork", "Neural network");
-        language.put("AutoSystem", "Auto system");
-        languages.put("EN",language);
-        language=new HashMap<>();
-        language.put("Доход компании", "Revni konpayi an");
-        language.put("ShowData", "Мontre done yo");
-        language.put("Regression", "Regression");
-        language.put("NeuralNetwork", "Rezo neral");
-        language.put("AutoSystem", "Sistèm otomatik");
-        languages.put("HT",language);
+        String[] sentences=Downloader.downloadLocalization(fileName).split("\n");
+        Map<String, String>language;
+        for(int i=0;i<sentences.length/6;i++)
+        {
+            language=new HashMap<>();
+            for(int j=1;j<6;j++) {
+                language.put(sentences[6 * i + j].split("-")[0], sentences[6 * i + j].split("-")[1]);
+            }
+            languages.put(sentences[6*i],language);
+        }
     }
 
-    public static Localization getInstance(){
+    public static Localization getInstance(String languageFile) throws FileNotFoundException {
         if(instance==null){
-            instance=new Localization();
+            instance=new Localization(languageFile);
         }
         return instance;
     }

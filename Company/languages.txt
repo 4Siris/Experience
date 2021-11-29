@@ -1,0 +1,12 @@
+RU
+Доход компании-Доход компании
+ShowData-Показать данные
+Regression-Регрессия
+NeuralNetwork-Нейронная сеть
+AutoSystem-Автоматизированная система
+EN
+Доход компании-Company income
+ShowData-Show data
+Regression-Regression
+NeuralNetwork-Neural network
+AutoSystem-Auto system

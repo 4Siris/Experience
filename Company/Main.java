@@ -7,6 +7,6 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
-        Processing processing=new Processing("C:/Users/Admin/IdeaProjects/Taxes/src/com/company/Input.txt");
+        Processing processing=new Processing("C:/Users/Admin/IdeaProjects/Taxes/src/com/company/Input.txt","C:/Users/Admin/IdeaProjects/Taxes/src/com/company/languages.txt");
     }
 }

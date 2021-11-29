@@ -1,14 +1,13 @@
 package com.company;
 
 import java.io.FileNotFoundException;
-import java.lang.reflect.Field;
 import java.util.*;
 
 public class Processing {
-    public Processing(String file) throws FileNotFoundException {
-        String input=Downloader.DownloadInput(file);
+    public Processing(String file,String languageFile) throws FileNotFoundException {
+        String input=Downloader.downloadInput(file);
         String[] services=input.split("\n");
-        Map<String, String> language=localization(services[0]);
+        Map<String, String> language=localization(services[0],languageFile);
         List<Service> serviceList = inputServices(services);
         Map<String, Double> customersIncome=new HashMap<>();
         Map<String, Double> servicesIncome=new HashMap<>();
@@ -18,8 +17,8 @@ public class Processing {
         showTopServices(servicesIncome,language);
     }
 
-    public Map<String, String> localization(String language){
-        return Localization.getInstance().getLanguages().get(language);
+    public Map<String, String> localization(String language,String languageFile) throws FileNotFoundException {
+        return Localization.getInstance(languageFile).getLanguages().get(language);
     }
 
     public List<Service> inputServices (String[] services){
@@ -65,7 +64,8 @@ public class Processing {
             salary*=service.getAccomplishedTime();
             tempSum-=salary;
             sum+=tempSum;
-            customersIncome.put(service.getCustomerName(),tempSum);
+            if(customersIncome.get(service.getCustomerName())==null)customersIncome.put(service.getCustomerName(),tempSum);
+            else customersIncome.put(service.getCustomerName(),customersIncome.get(service.getCustomerName())+tempSum);
             if(service instanceof ShowData)
                 if(servicesIncome.get("ShowData")==null) servicesIncome.put("ShowData",tempSum);
                     else servicesIncome.put("ShowData",servicesIncome.get("ShowData")+tempSum);
