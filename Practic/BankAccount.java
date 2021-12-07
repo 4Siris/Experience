@@ -13,8 +13,8 @@ public class BankAccount {
     public BankAccount(int sumHigh, int sumLow, com.company.currency currency, String FIO, String passportId, Address address) throws Exception {
         id=id+1;
         currentId=id;
-        this.sumHigh = sumHigh;
-        this.sumLow = sumLow;
+        if(sumHigh>=0)this.sumHigh = sumHigh+sumLow/100;
+        if(sumLow>=0)this.sumLow = sumLow%100;
         this.currency = currency;
         this.FIO = FIO;
         if(passportId.length()!=9)throw new Exception("Неправильный ввод паспорта!");
