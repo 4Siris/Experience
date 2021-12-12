@@ -8,8 +8,8 @@ public class Car extends Thread{
 
     public Car(WareHouse wareHouse){
         setWareHouse(wareHouse);
-        setCurrentAmount((int)(Math.random()*10+21));
-        setMaxAmount((int)(Math.random()*5+currentAmount));
+        setMaxAmount((int)(Math.random()*50));
+        setCurrentAmount((int)(Math.random()*maxAmount));
         if(Math.random()>0.5)add=true;
         else add=false;
     }
@@ -34,7 +34,7 @@ public class Car extends Thread{
         return add;
     }
 
-    public void run() {
+    public synchronized void run() {
         try {
             int ramp=0;
             while (ramp==0) {
@@ -42,7 +42,7 @@ public class Car extends Thread{
                 if (ramp == 0) wait();
             }
             wareHouse.setRamp(true,ramp-1);
-            System.out.println("Прибытие машины на рампу " + ramp);
+            System.out.println("Прибытие машины на рампу " + ramp + " ("+ currentAmount+" / "+maxAmount+") ");
             if(add){
                 while (currentAmount!=0){
                     boolean upload=wareHouse.upLoading(this);
