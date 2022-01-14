@@ -1,33 +1,37 @@
 package com.company;
 
-import java.util.Arrays;
-
 public class InputSort extends Sort{
-    public InputSort(){
-        super();
+    private int[] array;
+
+    public InputSort(int[] array){
+        this.array=new int[array.length];
+        for(int i=0;i<array.length;i++)
+        {
+            this.array[i]=array[i];
+        }
+    }
+
+    public int getElement(int i){
+        return array[i];
     }
 
     public void run() {
         try {
-            for(int i=1;i<row.length;i++){
-                int x=row[i];
-                int j=i;
-                while(j>0&&row[j-1]>x){
-                    sleep(6);
-                    row[j]=row[j-1];
-                    j--;
+            for(int i=1;i<array.length;i++){
+                int x=array[i];
+                int j;
+                for(j=i;j>0;j--){
+                    sleep(2);
+                    if(array[j-1]<=x)break;
+                    sleep(4);
+                    array[j]=array[j-1];
                 }
-                row[j]=x;
-                showRow();
+                sleep(4);
+                array[j]=x;
             }
             interrupt();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void showRow() {
-        System.out.println(Arrays.toString(row));
     }
 }

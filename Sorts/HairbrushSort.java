@@ -1,38 +1,44 @@
 package com.company;
 
-import java.util.Arrays;
-
 public class HairbrushSort extends Sort{
-    public HairbrushSort(){
-        super();
+    private int[] array;
+
+    public HairbrushSort(int[] array){
+        this.array=new int[array.length];
+        for(int i=0;i<array.length;i++)
+        {
+            this.array[i]=array[i];
+        }
     }
 
+    public int getElement(int i){
+        return array[i];
+    }
+    
     public void run() {
         try {
             final double factor = 1.247;
-            double step = row.length - 1;
+            double step = array.length - 1;
             while (step >= 1) {
-                for (int i = 0; (int)(i + step) < row.length; i++) {
+                for (int i = 0; (int)(i + step) < array.length; i++) {
                     sleep(2);
-                    if (row[i] > row[(int) (i + step)]) {
+                    if (array[i] > array[(int) (i + step)]) {
                         sleep(4);
-                        int temp = row[i];
-                        row[i] = row[(int) (i + step)];
-                        row[(int) (i + step)] = temp;
-                        showRow();
+                        int temp = array[i];
+                        array[i] = array[(int) (i + step)];
+                        array[(int) (i + step)] = temp;
                     }
                 }
                 step /= factor;
             }
-            for (int i = 0; i + 1 < row.length; i++) {
-                for (int j = 0; j + 1 < row.length - i; j++) {
+            for (int i = 0; i + 1 < array.length; i++) {
+                for (int j = 0; j + 1 < array.length - i; j++) {
                     sleep(2);
-                    if (row[j] > row[j + 1]) {
+                    if (array[j] > array[j + 1]) {
                         sleep(4);
-                        int temp = row[j];
-                        row[j] = row[j + 1];
-                        row[j + 1] = temp;
-                        showRow();
+                        int temp = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = temp;
                     }
                 }
             }
@@ -40,10 +46,5 @@ public class HairbrushSort extends Sort{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void showRow() {
-        System.out.println(Arrays.toString(row));
     }
 }

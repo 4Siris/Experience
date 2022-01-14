@@ -1,14 +1,22 @@
 package com.company;
 
-import java.util.Arrays;
-
 public class QuickSort extends Sort{
-    public QuickSort(){
-        super();
+    private int[] array;
+
+    public QuickSort(int[] array){
+        this.array=new int[array.length];
+        for(int i=0;i<array.length;i++)
+        {
+            this.array[i]=array[i];
+        }
+    }
+
+    public int getElement(int i){
+        return array[i];
     }
 
     public void run() {
-        quickSortPart(0,row.length-1);
+        quickSortPart(0,99);
         interrupt();
     }
 
@@ -22,32 +30,26 @@ public class QuickSort extends Sort{
 
     public int processing(int from,int to) {
         try {
-            int x = row[to];
+            int x = array[to];
             int begin = from;
             for (int i = from; i < to; i++) {
-                if (row[i] <= x) {
-                    sleep(6);
-                    int temp = row[i];
-                    row[i] = row[begin];
-                    row[begin] = temp;
+                sleep(2);
+                if (array[i] <= x) {
+                    sleep(4);
+                    int temp = array[i];
+                    array[i]=array[begin];
+                    array[begin]=temp;
                     begin++;
-                    showRow();
                 }
             }
-            sleep(6);
-            int temp = row[to];
-            row[to] = row[begin];
-            row[begin] = temp;
-            showRow();
+            sleep(4);
+            int temp = array[to];
+            array[to]=array[begin];
+            array[begin]=temp;
             return begin;
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         return -1;
-    }
-
-    @Override
-    public void showRow() {
-        System.out.println(Arrays.toString(row));
     }
 }

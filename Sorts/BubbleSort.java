@@ -1,24 +1,30 @@
 package com.company;
 
-import java.util.Arrays;
-
 public class BubbleSort extends Sort{
-    public BubbleSort(){
-        super();
+    private int[] array;
+
+    public BubbleSort(int[] array){
+        this.array=new int[array.length];
+        for(int i=0;i<array.length;i++)
+        {
+            this.array[i]=array[i];
+        }
     }
 
-    @Override
+    public int getElement(int i){
+        return array[i];
+    }
+
     public void run() {
         try {
-            for (int i = 0; i + 1 < row.length; i++) {
-                for (int j = 0; j + 1 < row.length - i; j++) {
+            for (int i = 0; i + 1 < array.length; i++) {
+                for (int j = 0; j + 1 < array.length - i; j++) {
                     sleep(2);
-                    if (row[j] > row[j + 1]) {
+                    if (array[j] > array[j + 1]) {
                         sleep(4);
-                        int temp = row[j];
-                        row[j] = row[j + 1];
-                        row[j + 1] = temp;
-                        showRow();
+                        int temp = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = temp;
                     }
                 }
             }
@@ -26,10 +32,5 @@ public class BubbleSort extends Sort{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void showRow() {
-        System.out.println(Arrays.toString(row));
     }
 }

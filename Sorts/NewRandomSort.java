@@ -1,10 +1,18 @@
 package com.company;
 
-import java.util.Arrays;
-
 public class NewRandomSort extends Sort{
-    public NewRandomSort(){
-        super();
+    private int[] array;
+
+    public NewRandomSort(int[] array){
+        this.array=new int[array.length];
+        for(int i=0;i<array.length;i++)
+        {
+            this.array[i]=array[i];
+        }
+    }
+
+    public int getElement(int i){
+        return array[i];
     }
 
     public void run() {
@@ -17,29 +25,23 @@ public class NewRandomSort extends Sort{
             int tempInd = 0;
             do {
                 int count = 0;
-                for (int i = tempInd; i < row.length; i++) {
-                    if (row[tempInd] <= row[i]) {
-                        sleep(2);
+                for (int i = tempInd; i < array.length; i++) {
+                    if (array[tempInd] <= array[i]) {
+                        Thread.sleep(2);
                         count++;
                     }
                 }
-                if (count == row.length - tempInd) tempInd++;
+                if (count == array.length - tempInd) tempInd++;
                 else {
-                    int ind = (int) (tempInd + (Math.random() * (20 - tempInd)));
+                    int ind = (int) (tempInd + (Math.random() * (array.length - tempInd)));
                     sleep(4);
-                    int temp = row[ind];
-                    row[ind] = row[tempInd];
-                    row[tempInd] = temp;
-                    showRow();
+                    int temp = array[ind];
+                    array[ind] = array[tempInd];
+                    array[tempInd] = temp;
                 }
-            } while (tempInd != row.length - 1);
+            } while (tempInd != array.length - 1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void showRow() {
-        System.out.println(Arrays.toString(row));
     }
 }

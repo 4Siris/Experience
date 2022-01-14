@@ -3,28 +3,18 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-//        BubbleSort row1=new BubbleSort();
-//        row1.showRow();
-//        row1.start();
-//        Thread.sleep(3000);
-//        ShakeSort row2=new ShakeSort();
-//        row2.showRow();
-//        row2.start();
-//        Thread.sleep(3000);
-//        HairbrushSort row3=new HairbrushSort();
-//        row3.showRow();
-//        row3.start();
-//        Thread.sleep(3000);
-//        InputSort row4= new InputSort();
-//        row4.showRow();
-//        row4.start();
-//        Thread.sleep(3000);
-//        QuickSort row5=new QuickSort();
-//        row5.showRow();
-//        row5.start();
-//        Thread.sleep(3000);
-//        NewRandomSort row6=new NewRandomSort();
-//        row6.showRow();
-//        row6.start();
+        int row[]=new int[100];
+        for (int i = 0; i < 100; i++) {
+            row[i] = i + 1;
+        }
+        for (int i = 0; i < 100; i++) {
+            int temp = row[i];
+            int j = (int)(Math.random()*100);
+            if (i != j) {
+                row[i] = row[j];
+                row[j] = temp;
+            }
+        }
+        Frame frame=new Frame(row);
     }
 }

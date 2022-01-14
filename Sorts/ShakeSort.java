@@ -1,36 +1,42 @@
 package com.company;
 
-import java.util.Arrays;
-
 public class ShakeSort extends Sort{
-    public ShakeSort(){
-        super();
+    private int[] array;
+
+    public ShakeSort(int[] array){
+        this.array=new int[array.length];
+        for(int i=0;i<array.length;i++)
+        {
+            this.array[i]=array[i];
+        }
+    }
+
+    public int getElement(int i){
+        return array[i];
     }
 
     public void run() {
         try {
             int left=0;
-            int right=row.length-1;
+            int right=array.length-1;
             while (left<=right){
                 for(int i=right;i>left;i--){
                     sleep(2);
-                    if(row[i-1]>row[i]){
+                    if(array[i-1]>array[i]){
                         sleep(4);
-                        int temp=row[i];
-                        row[i]=row[i-1];
-                        row[i-1]=temp;
-                        showRow();
+                        int temp=array[i];
+                        array[i]=array[i-1];
+                        array[i-1]=temp;
                     }
                 }
                 left++;
                 for(int i=left;i<right;i++){
                     sleep(2);
-                    if(row[i]>row[i+1]){
+                    if(array[i]>array[i+1]){
                         sleep(4);
-                        int temp=row[i];
-                        row[i]=row[i+1];
-                        row[i+1]=temp;
-                        showRow();
+                        int temp=array[i];
+                        array[i]=array[i+1];
+                        array[i+1]=temp;
                     }
                 }
                 right--;
@@ -39,10 +45,5 @@ public class ShakeSort extends Sort{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void showRow() {
-        System.out.println(Arrays.toString(row));
     }
 }
