@@ -16,11 +16,6 @@ public class NewRandomSort extends Sort{
     }
 
     public void run() {
-        newRandomSort();
-        interrupt();
-    }
-
-    public void newRandomSort() {
         try {
             int tempInd = 0;
             do {

@@ -17,7 +17,6 @@ public class QuickSort extends Sort{
 
     public void run() {
         quickSortPart(0,99);
-        interrupt();
     }
 
     public void quickSortPart(int from,int to){

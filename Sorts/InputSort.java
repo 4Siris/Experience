@@ -29,7 +29,6 @@ public class InputSort extends Sort{
                 sleep(4);
                 array[j]=x;
             }
-            interrupt();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

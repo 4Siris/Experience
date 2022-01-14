@@ -42,7 +42,6 @@ public class HairbrushSort extends Sort{
                     }
                 }
             }
-            interrupt();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

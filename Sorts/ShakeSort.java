@@ -41,7 +41,6 @@ public class ShakeSort extends Sort{
                 }
                 right--;
             }
-            interrupt();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
