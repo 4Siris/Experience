@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Capture and Grow</title>
+    <link rel="stylesheet" type="text/css" href="css/game.css">
+</head>
+<body>
+<div class="main">
+    <h3 th:text="${currentPlayer}+' Игрок'" class="playerNumber"></h3>
+    <table class="map">
+        <tr th:each="mapRow: ${map}">
+            <td th:each="field: ${mapRow}" th:class="'player'+${field.getClaim().getNumber()}+' '+${field.getField().getEachTerrain()}">
+            </td>
+        </tr>
+    </table>
+    <label th:text="${players[currentPlayer-1].getResources().toString()}" class="playerResources"></label>
+    <form action="/game" method="get">
+    <input type="text" name="coordinates" class="coordinates"><br>
+    <tr>
+        <input type="submit" name="action" value="capture">
+        <input type="submit" name="action" value="upgrade">
+        <input type="submit" name="action" value="clear">
+    </tr>
+    </form>
+    <div>
+        <form action="/game" method="get" class="secondForm">
+            <input type="submit" name="sur" value="surrender">
+            <input type="submit" name="turn" value="endTurn">
+        </form>
+    </div>
+    <div th:each="score: ${scores}">
+        <label th:text="${score.getKey}+' - '+${score.getValue}+' из '+${aimScore}"></label><br>
+    </div>
+    <label th:text="${message}"></label>
+    <form action="/game" method="get">
+        <div th:each="building: ${buildings}">
+            <input type="submit" name="building" th:value="${building}"><br>
+        </div>
+    </form>
+</div>
+</body>
+</html>

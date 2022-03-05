@@ -1,0 +1,35 @@
+body{
+    background-image: url(pic/backGroundStartMenu.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+a{
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    text-align: center;
+    color: #d9d24a; 
+    border: 3px ridge #d9d24a;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.main{
+	margin-left: auto;
+	margin-right: auto;
+    width: 400px;
+    background-color: #5c2a2a;
+    border: 8px ridge #d9d24a;
+    margin-top: 2px;
+}
+.buttonSpace{
+    margin-top: 10px;
+    margin-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
+    background: #5c2a2a;
+    color: #d9d24a;
+    font-size: 20px;
+    font-style: italic;
+    text-align: center;
+}

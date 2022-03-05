@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="css/winScene.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Capture and Grow</title>
+</head>
+<body>
+<div class="main">
+    <h3 th:text="${message}"></h3>
+    <div class="buttonsSpace">
+        <a href="/prestartMenu">Ещё раз</a><br>
+        <a href="/">Главное меню</a><br>
+        <a href="/statistic">Статистика</a>
+    </div>
+    <form class="saveForm" action="statistic" method="get">
+        <label class="saveLabel">Сохранить результат?</label><br>
+        <input type="text" placeholder="login" name="login" class="inputAc">
+        <input type="password" placeholder="password" name="password" class="inputAc">
+        <input type="submit" name="save" value="OK" class="saveButton">
+    </form>
+</div>
+</body>
+</html>

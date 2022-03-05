@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Capture and Crow</title>
+    <link rel="stylesheet" type="text/css" href="css/prestartMenu.css">
+</head>
+<body>
+<form action="/startGame" method="get">
+    <div class="menu">
+        <div class="inputBlockX">
+            <lable class="text">Ширина</lable>
+            <input type="text" name="X" class="input">
+        </div>
+        <div class="inputBlockY">
+            <lable class="text">Высота</lable>
+            <input type="text" name="Y" class="input">
+        </div>
+        <div class="inputBlock">
+            <lable class="text">1 Игрок</lable>
+            <input type="text" name="Player1" class="input">
+        </div>
+        <div class="inputBlock">
+            <lable class="text">2 Игрок</lable>
+            <input type="text" name="Player2" class="input">
+        </div>
+        <div class="inputBlock">
+            <lable class="text">3 Игрок</lable>
+            <input type="text" name="Player3" class="input">
+        </div>
+        <div class="inputBlock">
+            <lable class="text">4 Игрок</lable>
+            <input type="text" name="Player4" class="input">
+        </div>
+        <h1 th:text="${message}" class="text"></h1>
+        <input value="OK" type="submit" class="button">
+    </div>
+</form>
+</body>
+</html>

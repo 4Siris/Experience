@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Capture and Grow</title>
+    <link rel="stylesheet" type="text/css" href="css/statistic.css">
+</head>
+<body>
+<form action="/statistic" method="get">
+    <div class="statistic">
+        <h1>Статистика</h1>
+        <table>
+            <tr>
+                <td>
+                    <lable>№</lable>
+                </td>
+                <td>
+                    <input type="submit" name="action" value="Name" class="button">
+                </td>
+                <td>
+                    <input type="submit" name="action" value="Score" class="button">
+                </td>
+            </tr>
+            <tr th:each="account,state: ${accounts}">
+                <td>
+                    <label th:text="${state.index+1}" class="text"></label>
+                </td>
+                <td>
+                    <label th:text="${account.getLogin}" class="text"></label>
+                </td>
+                <td>
+                    <label th:text="${account.getScore}" class="text"></label>
+                </td>
+            </tr>
+        </table>
+        <div class="menuButtonSpace">
+            <a href="/" class="menuButton">Главное меню</a>
+        </div>
+    </div>
+</form>
+</body>
+</html>

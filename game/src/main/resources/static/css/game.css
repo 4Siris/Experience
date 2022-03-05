@@ -1,0 +1,116 @@
+*{
+    color: #d9d24a;
+}
+body{
+    background-image: url(pic/backGroundGame.jfif);
+}
+input{
+    background: #5c2a2a;
+    color: #d9d24a;
+}
+form{
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    width: 180px;
+}
+label{
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+td{
+    width: 100px;
+    height: 100px;
+}
+.main{
+    background: #5c2a2a;
+    width: 1550px;
+    border-spacing: 10px;
+    border: 8px ridge #d9d24a;
+    margin-top: 2px;
+    align-content: center;
+    text-align: center;
+}
+.playerNumber{
+    color: #d9d24a;
+    font-size: 40px;
+    text-align: center;
+}
+.map{
+    margin-left: auto;
+    margin-right: auto;
+    border: 8px ridge #d9d24a;
+    border-spacing: 0px;
+}
+.coordinates{
+    width: 167px;
+    border: 3px solid #d9d24a;
+}
+.secondForm{
+    width: 142.5px;
+}
+.playerScore{
+    align-content: center;
+    text-align: center;
+}
+.player0{
+    border: 1px solid #d9d24a;
+}
+.player1{
+    border: 1px solid #00ff00;
+}
+.player2{
+    border: 1px solid #0000ff;
+}
+.player3{
+    border: 1px solid #ff0000;
+}
+.player4{
+    border: 1px solid #ff00ff;
+}
+.lake{
+    background-image: url(pic/lake.png);
+}
+.forest{
+    background-image: url(pic/forest.png);
+}
+.mountain{
+    background-image: url(pic/mountain.png);
+}
+.field{
+    background-image: url(pic/field.png);
+}
+.mountain.forest{
+    background-image: url(pic/mountain+forest.png);
+}
+.field.mountain{
+    background-image: url(pic/field+mountain.png);
+}
+.lake.mountain{
+    background-image: url(pic/lake+mountain.png);
+}
+.lake.forest{
+    background-image: url(pic/lake+forest.png);
+}
+.field.lake{
+    background-image: url(pic/field+lake.png);
+}
+.field.forest{
+    background-image: url(pic/field+forest.png);
+}
+.field.mountain.forest{
+    background-image: url(pic/field+mountain+forest.png);
+}
+.field.lake.mountain{
+    background-image: url(pic/field+lake+mountain.png);
+}
+.field.lake.forest{
+    background-image: url(pic/field+lake+forest.png);
+}
+.lake.mountain.forest{
+    background-image: url(pic/lake+mountain+forest.png);
+}
+.lake.mountain.forest.field{
+    background-image: url(pic/all.png);
+}

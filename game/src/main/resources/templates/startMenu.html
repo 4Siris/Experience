@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Capture and Grow</title>
+    <link rel="stylesheet" type="text/css" href="css/startMenu.css">
+</head>
+<body>
+<div class="main">
+    <div th:each="button: ${menuButtons}" class="buttonSpace">
+        <a th:href="${button.buttonLead}" th:text="${button.name}"></a><br>
+    </div>
+</div>
+</body>
+</html>

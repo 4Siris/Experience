@@ -1,0 +1,48 @@
+body{
+    background-image: url(pic/backGroundGame.jfif);   
+}   
+h1{
+    text-align: center;
+}
+.menu{
+    background: #5c2a2a;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    border: 8px ridge #d9d24a;
+    margin-top: 2px;
+}
+.text{
+    color: #d9d24a;
+    font-size: 20px;
+    font-style: italic;
+}
+.input{
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid #d9d24a;
+    background: #5c2a2a;
+    color: #d9d24a;
+}
+.inputBlockX{
+    margin-left: auto;
+    margin-right: auto;
+    width: 247.18px;
+}
+.inputBlockY{
+    margin-left: auto;
+    margin-right: auto;
+    width: 245.23px;
+}
+.inputBlock{
+    margin-left: auto;
+    margin-right: auto;
+    width: 243px;
+}
+.button{
+    margin-bottom: 10px;
+    margin-left: 350px;
+    border: 3px ridge #d9d24a;
+    background: #5c2a2a;
+    color: #d9d24a;
+}
