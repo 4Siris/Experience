@@ -30,7 +30,6 @@ public class MainController {
     List<ButtonMenu> buttonMenu = new ArrayList<>();{
         buttonMenu.add(new ButtonMenu("Начать игру","/prestartMenu"));
         buttonMenu.add(new ButtonMenu("Обучение", "/tutorial"));
-        buttonMenu.add(new ButtonMenu("Правила", "/rules"));
         buttonMenu.add(new ButtonMenu("Статистика", "/statistic"));
     }
 
@@ -113,58 +112,9 @@ public class MainController {
                        @RequestParam(name="turn",required = false)String endTurn,
                        @RequestParam(name="building",required = false)String building,
                        Model model){
-        //Работа программы если игрок делает что-то с картой
-        if(action!=null) {
-            int x;
-            int y;
-            try {
-                if(coordinates.split(";").length!=2)throw new NumberFormatException();
-                x=Integer.parseInt(coordinates.split(";")[0]);
-                y=gm.getMap().length+1-Integer.parseInt(coordinates.split(";")[1]);
-                if(x<1||x>gm.getMap()[0].length||y<1||y>gm.getMap().length)throw new NumberFormatException();
-            }catch (NumberFormatException e){
-                model.addAttribute("message","Неправильный ввод координат");
-                model.addAttribute("map",gm.getMap());
-                model.addAttribute("currentPlayer",gm.getCurrentPlayer()+1);
-                model.addAttribute("players",gm.getPlayers());
-                model.addAttribute("scores", gm.getScores());
-                model.addAttribute("aimScore",gm.getAimScore());
-                return "game";
-            }
-            //Реализация кнопок
-            if (action.equals("capture")) {
-                switch (gm.takeCell(x - 1, y - 1)) {
-                    case 1 -> model.addAttribute("message", "Вам надо выбрать ничейную землю");
-                    case 2 -> model.addAttribute("message", "Это клетка занята вами");
-                    case 3 -> model.addAttribute("message", "Недостаточно ресурсов");
-                    case 4 -> model.addAttribute("message", "Это клетка не граничит с вашей территорией");
-                }
-            }
-            if (action.equals("upgrade")) {
-                ArrayList<String> possibleBuildings = gm.checkForUpgradesCell(x-1,y-1);
-                if(possibleBuildings.size()==0){
-                    model.addAttribute("message","Нечего строить");
-                }else {
-                    switch (possibleBuildings.get(0)) {
-                        case "Не достаточно ресурсов" -> model.addAttribute("message", "Не достаточно ресурсов");
-                        case "Не ваша клетка" -> model.addAttribute("message", "Не ваша клетка");
-                        case "На клетке уже есть постройка" -> model.addAttribute("message", "На клетке уже есть постройка");
-                        default -> {
-                            model.addAttribute("buildings",gm.checkForUpgradesCell(x-1,y-1));
-                            upgradeX=x;
-                            upgradeY=y;
-                        }
-                    }
-                }
-
-            }
-            if (action.equals("clear")){
-                switch (gm.deleteUpgrade(x-1,y-1)){
-                    case 1->model.addAttribute("message","У вас нету клеток с улучшениями");
-                    case 2->model.addAttribute("message","Это не ваша клетка");
-                    case 3->model.addAttribute("message","На клетке ничего не простроено");
-                }
-            }
+        String scene = null;
+        if(action!=null){
+            scene = mapAction(action,coordinates,building,model);
         }
         if(building!=null){
             int res = gm.upgradeCell(building,upgradeX-1,upgradeY-1);
@@ -172,32 +122,105 @@ public class MainController {
                 model.addAttribute("message",("У вас недостаточно ресурсов ("+res+")"));
             }
         }
-        //==============
-
-        //Работа контроллера если игрок сдаётся
         if(sur!=null){
-            gm.surrender();
-            if(gm.checkIfAlong()){
-                for (Map.Entry<String, Integer> player : gm.getScores().entrySet())
-                    model.addAttribute("message",("Победил игрок " + player.getKey() + "!"));
-                return "winScene";
-            }
+            scene = surrender(model);
         }
-        //Работа контроллера если игрок заканчивает ход
         if(endTurn!=null){
-            String res=gm.endTurn();
-            if(!res.equals("")){
-                model.addAttribute("message", res);
-                return "winScene";
-            }
+            scene = endTurn(model);
         }
-
+        if(scene!=null)return scene;
         model.addAttribute("map",gm.getMap());
         model.addAttribute("currentPlayer",gm.getCurrentPlayer()+1);
         model.addAttribute("players", gm.getPlayers());
         model.addAttribute("scores", gm.getScores());
         model.addAttribute("aimScore",gm.getAimScore());
         return "game";
+    }
+
+    private String mapAction(String action, String coordinates, String building, Model model) {
+        //Работа программы если игрок делает что-то с картой
+        int x;
+        int y;
+        String bool = checkCoordinates(coordinates,model);
+        if(bool!=null)return bool;
+        x = Integer.parseInt(coordinates.split(";")[0]);
+        y = gm.getMap().length + 1 - Integer.parseInt(coordinates.split(";")[1]);
+        //Реализация кнопок
+        if (action.equals("capture")) {
+            switch (gm.takeCell(x - 1, y - 1)) {
+                case 1 -> model.addAttribute("message", "Вам надо выбрать ничейную землю");
+                case 2 -> model.addAttribute("message", "Это клетка занята вами");
+                case 3 -> model.addAttribute("message", "Недостаточно ресурсов");
+                case 4 -> model.addAttribute("message", "Это клетка не граничит с вашей территорией");
+            }
+        }
+
+        if (action.equals("upgrade")) {
+            ArrayList<String> possibleBuildings = gm.checkForUpgradesCell(x - 1, y - 1);
+            if (possibleBuildings.size() == 0) {
+                model.addAttribute("message", "Нечего строить");
+            } else {
+                switch (possibleBuildings.get(0)) {
+                    case "Не достаточно ресурсов" -> model.addAttribute("message", "Не достаточно ресурсов");
+                    case "Не ваша клетка" -> model.addAttribute("message", "Не ваша клетка");
+                    case "На клетке уже есть постройка" -> model.addAttribute("message", "На клетке уже есть постройка");
+                    default -> {
+                        model.addAttribute("buildings", gm.checkForUpgradesCell(x - 1, y - 1));
+                        upgradeX = x;
+                        upgradeY = y;
+                    }
+                }
+            }
+        }
+
+        if (action.equals("clear")) {
+            switch (gm.deleteUpgrade(x - 1, y - 1)) {
+                case 1 -> model.addAttribute("message", "У вас нету клеток с улучшениями");
+                case 2 -> model.addAttribute("message", "Это не ваша клетка");
+                case 3 -> model.addAttribute("message", "На клетке ничего не простроено");
+            }
+        }
+        //==============
+        return null;
+    }
+    private String checkCoordinates(String coordinates, Model model){
+        int x;
+        int y;
+        try {
+            if (coordinates.split(";").length != 2) throw new NumberFormatException();
+            x = Integer.parseInt(coordinates.split(";")[0]);
+            y = gm.getMap().length + 1 - Integer.parseInt(coordinates.split(";")[1]);
+            if (x < 1 || x > gm.getMap()[0].length || y < 1 || y > gm.getMap().length)
+                throw new NumberFormatException();
+        } catch (NumberFormatException e) {
+            model.addAttribute("message", "Неправильный ввод координат");
+            model.addAttribute("map", gm.getMap());
+            model.addAttribute("currentPlayer", gm.getCurrentPlayer() + 1);
+            model.addAttribute("players", gm.getPlayers());
+            model.addAttribute("scores", gm.getScores());
+            model.addAttribute("aimScore", gm.getAimScore());
+            return "game";
+        }
+        return null;
+    }
+
+    private String surrender(Model model){
+        gm.surrender();
+        if(gm.checkIfAlong()){
+            for (Map.Entry<String, Integer> player : gm.getScores().entrySet())
+                model.addAttribute("message",("Победил игрок " + player.getKey() + "!"));
+            return "winScene";
+        }
+        return null;
+    }
+
+    private String endTurn(Model model){
+        String res=gm.endTurn();
+        if(!res.equals("")){
+            model.addAttribute("message", res);
+            return "winScene";
+        }
+        return null;
     }
 
     @GetMapping("/tutorial")
@@ -208,15 +231,5 @@ public class MainController {
         while (fin.hasNextLine())text+=fin.nextLine()+"\n";
         model.addAttribute("tutorial",text);
         return "tutorial";
-    }
-
-    @GetMapping("/rules")
-    public String rules(Model model) throws FileNotFoundException {
-        FileReader fileReader = new FileReader("C:/Users/Admin/IdeaProjects/gam/src/main/java/org/example/rules.txt");
-        Scanner fin = new Scanner(fileReader);
-        String text = "";
-        while (fin.hasNextLine())text+=fin.nextLine()+"\n";
-        model.addAttribute("rules",text);
-        return "rules";
     }
 }

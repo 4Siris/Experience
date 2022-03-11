@@ -31,6 +31,8 @@ td{
     margin-top: 2px;
     align-content: center;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 .playerNumber{
     color: #d9d24a;
